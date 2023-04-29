@@ -28,7 +28,29 @@
  */
 function parseStory(rawStory) {
   // Your code here.
-  return {}; // This line is currently wrong :)
+  const regex = /[a-zA-Z]+(\[[a-zA-Z]+\])?|\S+/g;
+  const matches = rawStory.match(regex);
+
+  console.log(matches);
+  // console.log(rawStory)
+  const words = matches.map((match) => {
+    const word = match.replace(/\[.*?\]/, ""); // Remove any part of speech tags from the word
+    const posMatch = match.match(/\[(v|a|n)\]/); // Find any part of speech tag in the word
+    let pos = posMatch ? posMatch[1] : undefined; // Extract the part of speech (if any) from the tag
+    if (pos) { // Only include the pos key if it is defined
+      // Map the pos abbreviation to the full part of speech name
+      if (pos === "v") {
+        pos = "verb";
+      } else if (pos === "a") {
+        pos = "adjective";
+      } else if (pos === "n") {
+        pos = "noun";
+      }
+    }
+    return { word, ...(pos && { pos }) }; // Use object spread syntax to conditionally include the pos key
+  });
+  console.log(words);
+  return words; // This line is currently wrong :)
 }
 
 /**
