@@ -31,7 +31,6 @@ function parseStory(rawStory) {
   const regex = /[a-zA-Z]+(\[[a-zA-Z]+\])?|\S+/g;
   const matches = rawStory.match(regex);
 
-  console.log(matches);
   // console.log(rawStory)
   const words = matches.map((match) => {
     const word = match.replace(/\[.*?\]/, ""); // Remove any part of speech tags from the word
@@ -49,7 +48,6 @@ function parseStory(rawStory) {
     }
     return { word, ...(pos && { pos }) }; // Use object spread syntax to conditionally include the pos key
   });
-  console.log(words);
   return words; // This line is currently wrong :)
 }
 
@@ -67,5 +65,67 @@ function parseStory(rawStory) {
 getRawStory()
   .then(parseStory)
   .then((processedStory) => {
-    console.log(processedStory);
+    console.log(processedStory)
+    let wordCount = 0;
+    for (const word of processedStory) {
+      const madLibsEdit = document.querySelector(".madLibsEdit");
+      const el = document.createElement("span");
+      if (word.pos) {
+        word.word = ''
+        const input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.classList.add(`input-${wordCount++}`);
+        setEventOfInput(input)
+        input.setAttribute("placeholder", word.pos);
+        // todo: generate input classes dynamically by incrementing based on pos count
+        madLibsEdit.appendChild(input);
+        continue;
+      }
+      // check the word if it is a letter or not
+      if(word.word.match(/[a-zA-Z]/)){
+        el.innerText = ` ${word.word}`;
+      }
+      else{
+        el.innerText = word.word;
+      }
+      madLibsEdit.appendChild(el);
+    }
+    wordCount = 0;
+    for (const word of processedStory) {
+      const madLibsPreview = document.querySelector(".madLibsPreview");
+      const el = document.createElement("span");
+      if (word.pos) {
+        word.word = ''
+        const input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.classList.add(`input-${wordCount++}`);
+        // todo: generate input classes dynamically by incrementing based on pos count
+        madLibsPreview.appendChild(input);
+        continue;
+      }
+      // check the word if it is a letter or not
+      if(word.word.match(/[a-zA-Z]/)){
+        el.innerText = ` ${word.word}`;
+      }
+      else{
+        el.innerText = word.word;
+      }
+      madLibsPreview.appendChild(el);
+    }
   });
+
+  function setEventOfInput(input){
+    // onInput
+    input.addEventListener("input", () => {
+      const inputClasses = input.classList;
+      const inputClass = inputClasses[inputClasses.length - 1];
+      const inputClassNumber = inputClass.split("-")[1];
+      const inputClassNumberInt = parseInt(inputClassNumber);
+      const madLibsEdit = document.querySelector(".madLibsEdit");
+      const madLibsPreview = document.querySelector(".madLibsPreview");
+      const inputEdit = madLibsEdit.querySelector(`.input-${inputClassNumberInt}`);
+      const inputPreview = madLibsPreview.querySelector(`.input-${inputClassNumberInt}`);
+      inputEdit.value = input.value;
+      inputPreview.value = input.value;
+    })
+  }
