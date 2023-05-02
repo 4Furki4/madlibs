@@ -77,7 +77,6 @@ getRawStory()
         input.classList.add(`input-${wordCount++}`);
         setEventOfInput(input)
         input.setAttribute("placeholder", word.pos);
-        // todo: generate input classes dynamically by incrementing based on pos count
         madLibsEdit.appendChild(input);
         continue;
       }
@@ -98,7 +97,7 @@ getRawStory()
         word.word = ''
         const input = document.createElement("input");
         input.setAttribute("type", "text");
-        input.setAttribute('readonly', true)
+        input.setAttribute('disabled', true)
         input.classList.add(`input-${wordCount++}`);
         // todo: generate input classes dynamically by incrementing based on pos count
         madLibsPreview.appendChild(input);

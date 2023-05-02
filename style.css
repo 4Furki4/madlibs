@@ -1,3 +1,55 @@
 /**
  * Your CSS goes here.
  */
+
+*, *::after, *::before{
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    height: 100dvh;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+    /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite; */
+    background: linear-gradient(45deg, rgba(131,58,180,1), rgba(251,145,251,1), rgba(226,128,255,1), rgba(131,58,180,1));
+    background-size: 400% 400%;
+	animation: gradient 10s ease infinite alternate-reverse;
+}
+@keyframes gradient{
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.madLibsEdit, .madLibsPreview{
+    width: 90%;
+    margin-inline: auto;
+    border: 2px solid purple;
+    border-radius: 10px;
+    padding: 5%;
+}
+span, input{
+    margin-top: .5rem;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+}
+input{
+    margin-left: .5rem;
+}
+input{
+    background-color: transparent;
+    width: min(25%, 150px);
+    border: 0;
+    border-bottom: inherit;
+}
+input:focus{
+    outline: none;
+}
