@@ -1,3 +1,1 @@
-Louis[n] went[v] to the store[n], and it was fun[a]. He taught[v] the class[n].
-The abbreviation[n] "n" means[v] noun. We use[v] the letter[n] "v" for verbs.
-And for "a", you can[v] make a good[a] guess.
+Soon her eye[n] fell[v] on a little[a] glass box that was lying under the table: she opened[v] it, and found in it a very small cake[n], on which the words `EAT ME' were beautifully marked in currants. `Well, I'll eat it,' said Alice[n], `and if it makes me grow[v] larger, I can reach the key[n]; and if it makes me grow[v] smaller, I can creep[v] under the door; so either way I'll get into the garden[n], and I don't care which happens!'

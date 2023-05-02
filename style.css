@@ -63,3 +63,8 @@ input:focus::placeholder{
 .result{
     color: purple;
 }
+
+h1{
+    color: rgb(57, 72, 103);
+    text-align: center;
+  }
