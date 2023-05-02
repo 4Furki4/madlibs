@@ -98,6 +98,7 @@ getRawStory()
         word.word = ''
         const input = document.createElement("input");
         input.setAttribute("type", "text");
+        input.setAttribute('readonly', true)
         input.classList.add(`input-${wordCount++}`);
         // todo: generate input classes dynamically by incrementing based on pos count
         madLibsPreview.appendChild(input);
