@@ -76,6 +76,7 @@ getRawStory()
         input.setAttribute("type", "text");
         input.classList.add(`input-${wordCount++}`);
         setEventOfInput(input)
+        setEnterKeypress(input,wordCount)
         input.setAttribute("placeholder", word.pos);
         madLibsEdit.appendChild(input);
         continue;
@@ -95,12 +96,11 @@ getRawStory()
       const el = document.createElement("span");
       if (word.pos) {
         word.word = ''
-        const input = document.createElement("input");
-        input.setAttribute("type", "text");
-        input.setAttribute('disabled', true)
-        input.classList.add(`input-${wordCount++}`);
+        const result = document.createElement("span");
+        result.innerText = ' _____';
+        result.classList.add(`result-${wordCount++}`, "result");
         // todo: generate input classes dynamically by incrementing based on pos count
-        madLibsPreview.appendChild(input);
+        madLibsPreview.appendChild(result);
         continue;
       }
       // check the word if it is a letter or not
@@ -124,8 +124,22 @@ getRawStory()
       const madLibsEdit = document.querySelector(".madLibsEdit");
       const madLibsPreview = document.querySelector(".madLibsPreview");
       const inputEdit = madLibsEdit.querySelector(`.input-${inputClassNumberInt}`);
-      const inputPreview = madLibsPreview.querySelector(`.input-${inputClassNumberInt}`);
+      const inputPreview = madLibsPreview.querySelector(`.result-${inputClassNumberInt}`);
       inputEdit.value = input.value;
-      inputPreview.value = input.value;
+      if(!inputEdit.value){
+        inputPreview.innerText = ' ______';
+        console.log(inputPreview.innerText);
+      }else{
+        inputPreview.innerText = ` ${input.value}`;
+      }
     })
   }
+  function setEnterKeypress(input, count){
+    input.addEventListener("keypress", (e) => {
+      if(e.key === "Enter"){
+        let nextInput = document.querySelector(`.input-${count}`)
+        nextInput?.focus()
+      }
+    })
+  }
+

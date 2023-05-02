@@ -53,3 +53,6 @@ input{
 input:focus{
     outline: none;
 }
+.result{
+    color: purple;
+}
