@@ -126,11 +126,17 @@ getRawStory()
       const inputEdit = madLibsEdit.querySelector(`.input-${inputClassNumberInt}`);
       const inputPreview = madLibsPreview.querySelector(`.result-${inputClassNumberInt}`);
       inputEdit.value = input.value;
-      if(!inputEdit.value){
-        inputPreview.innerText = ' ______';
-        console.log(inputPreview.innerText);
-      }else{
-        inputPreview.innerText = ` ${input.value}`;
+      if(inputEdit.value.length < 20){
+        if(!inputEdit.value){
+          inputPreview.innerText = ' ______';
+          console.log(inputPreview.innerText);
+        }else{
+          inputPreview.innerText = ` ${input.value}`;
+        }
+      }
+      else{
+        input.value = input.value.substring(0, 20);
+        alert("you can type max 20 characters")
       }
     })
   }

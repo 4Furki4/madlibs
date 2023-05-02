@@ -36,6 +36,7 @@ body{
     border: 2px solid purple;
     border-radius: 10px;
     padding: 5%;
+    box-shadow: 0px 2px 5px purple;
 }
 span, input{
     margin-top: .5rem;
