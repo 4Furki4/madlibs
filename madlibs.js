@@ -76,8 +76,8 @@ getRawStory()
         input.setAttribute("type", "text");
         input.classList.add(`input-${wordCount++}`);
         setEventOfInput(input)
-        setEnterKeypress(input,wordCount)
         input.setAttribute("placeholder", word.pos);
+        // todo: generate input classes dynamically by incrementing based on pos count
         madLibsEdit.appendChild(input);
         continue;
       }
@@ -96,11 +96,12 @@ getRawStory()
       const el = document.createElement("span");
       if (word.pos) {
         word.word = ''
-        const result = document.createElement("span");
-        result.innerText = ' _____';
-        result.classList.add(`result-${wordCount++}`, "result");
+        const input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.setAttribute('readonly', true)
+        input.classList.add(`input-${wordCount++}`);
         // todo: generate input classes dynamically by incrementing based on pos count
-        madLibsPreview.appendChild(result);
+        madLibsPreview.appendChild(input);
         continue;
       }
       // check the word if it is a letter or not
@@ -124,28 +125,8 @@ getRawStory()
       const madLibsEdit = document.querySelector(".madLibsEdit");
       const madLibsPreview = document.querySelector(".madLibsPreview");
       const inputEdit = madLibsEdit.querySelector(`.input-${inputClassNumberInt}`);
-      const inputPreview = madLibsPreview.querySelector(`.result-${inputClassNumberInt}`);
+      const inputPreview = madLibsPreview.querySelector(`.input-${inputClassNumberInt}`);
       inputEdit.value = input.value;
-      if(inputEdit.value.length < 20){
-        if(!inputEdit.value){
-          inputPreview.innerText = ' ______';
-          console.log(inputPreview.innerText);
-        }else{
-          inputPreview.innerText = ` ${input.value}`;
-        }
-      }
-      else{
-        input.value = input.value.substring(0, 20);
-        alert("you can type max 20 characters")
-      }
+      inputPreview.value = input.value;
     })
   }
-  function setEnterKeypress(input, count){
-    input.addEventListener("keypress", (e) => {
-      if(e.key === "Enter"){
-        let nextInput = document.querySelector(`.input-${count}`)
-        nextInput?.focus()
-      }
-    })
-  }
-
