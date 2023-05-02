@@ -46,13 +46,19 @@ input{
     margin-left: .5rem;
 }
 input{
+    transition: all 0.5s;
     background-color: transparent;
     width: min(25%, 150px);
     border: 0;
     border-bottom: inherit;
 }
 input:focus{
+    border-bottom: 2px solid green;
     outline: none;
+}
+input:focus::placeholder{
+    
+    color: purple;
 }
 .result{
     color: purple;
